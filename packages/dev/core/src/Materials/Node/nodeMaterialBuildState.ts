@@ -5,29 +5,18 @@ import { ShaderLanguage } from "../shaderLanguage";
 import type { NodeMaterialConnectionPoint } from "./nodeMaterialBlockConnectionPoint";
 import { ShaderStore as EngineShaderStore } from "../../Engines/shaderStore";
 import { Constants } from "../../Engines/constants";
+import { CoreNodeMaterialBuildState } from "./coreNodeMaterialBuildState";
 
 /**
  * Class used to store node based material build state
  */
-export class NodeMaterialBuildState {
+export class NodeMaterialBuildState extends CoreNodeMaterialBuildState {
     /** Gets or sets a boolean indicating if the current state can emit uniform buffers */
     public supportUniformBuffers = false;
-    /**
-     * Gets the list of emitted attributes
-     */
-    public attributes: string[] = [];
-    /**
-     * Gets the list of emitted uniforms
-     */
-    public uniforms: string[] = [];
     /**
      * Gets the list of emitted constants
      */
     public constants: string[] = [];
-    /**
-     * Gets the list of emitted samplers
-     */
-    public samplers: string[] = [];
     /**
      * Gets the list of emitted functions
      */
@@ -72,13 +61,6 @@ export class NodeMaterialBuildState {
     public _injectAtEnd = "";
 
     private _repeatableContentAnchorIndex = 0;
-    /** @internal */
-    public _builtCompilationString = "";
-
-    /**
-     * Gets the emitted compilation strings
-     */
-    public compilationString = "";
 
     /**
      * Gets the current shader language to use
